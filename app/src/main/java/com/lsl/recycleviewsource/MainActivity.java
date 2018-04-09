@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new MyAdapter());
         //set divider
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
     }
 
 

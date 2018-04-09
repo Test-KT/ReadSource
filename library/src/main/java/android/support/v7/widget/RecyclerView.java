@@ -5346,9 +5346,11 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
      * may be repositioned by a LayoutManager without remeasurement.</p>
      */
     public final class Recycler {
+        //未与RecyclerView分离的ViewHolder列表
         final ArrayList<ViewHolder> mAttachedScrap = new ArrayList<>();
+        //表示数据已经改变的ewHolder列表
         ArrayList<ViewHolder> mChangedScrap = null;
-
+        //ViewHolder缓存列表
         final ArrayList<ViewHolder> mCachedViews = new ArrayList<ViewHolder>();
 
         private final List<ViewHolder>
@@ -5356,7 +5358,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
 
         private int mRequestedCacheMax = DEFAULT_CACHE_SIZE;
         int mViewCacheMax = DEFAULT_CACHE_SIZE;
-
+        //ViewHolder缓存池
         RecycledViewPool mRecyclerPool;
 
         private ViewCacheExtension mViewCacheExtension;
