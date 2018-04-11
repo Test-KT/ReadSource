@@ -6084,18 +6084,20 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
          */
         ViewHolder getScrapOrHiddenOrCachedHolderForPosition(int position, boolean dryRun) {
             final int scrapCount = mAttachedScrap.size();
-
+            //在还未detach的废弃视图中查找出来一个类型匹配(无效类型)的view.
             // Try first for an exact, non-invalid match from scrap.
             for (int i = 0; i < scrapCount; i++) {
                 final ViewHolder holder = mAttachedScrap.get(i);
                 if (!holder.wasReturnedFromScrap() && holder.getLayoutPosition() == position
                         && !holder.isInvalid() && (mState.mInPreLayout || !holder.isRemoved())) {
+                    //表明这个ViewHolder是从废弃的View集合中取出来的，可用于itemView的返回值。
                     holder.addFlags(ViewHolder.FLAG_RETURNED_FROM_SCRAP);
                     return holder;
                 }
             }
 
             if (!dryRun) {
+                //找到已经隐藏，但是未被删除的view，然后将其detach掉，detach scrap中
                 View view = mChildHelper.findHiddenNonRemovedView(position);
                 if (view != null) {
                     // This View is good to be used. We just need to unhide, detach and move to the
