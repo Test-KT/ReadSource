@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lsl.recycleviewsource.MainActivity">
-
+    tools:context="com.lsl.recycleviewsource.MainActivity"
+    android:orientation="vertical">
+    <Button
+        android:onClick="showDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle"
@@ -12,5 +17,7 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+
 
 </LinearLayout>

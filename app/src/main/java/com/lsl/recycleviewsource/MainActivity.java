@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycle);
-
         mDatas = getData();
-
+        Log.e("info--->","init recycleview");
         //set layoutmanager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setHasFixedSize(true); //布局长宽 固定
         //set adapter
         recyclerView.setAdapter(new MyAdapter());
         //set divider
@@ -80,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return list;
+    }
+
+
+    public void showDialog(View v) {
+
+
     }
 
 }
