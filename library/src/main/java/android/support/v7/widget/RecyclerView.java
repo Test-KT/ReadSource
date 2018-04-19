@@ -5379,7 +5379,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
         int mViewCacheMax = DEFAULT_CACHE_SIZE;
         //ViewHolder缓存池
         RecycledViewPool mRecyclerPool;
-
+        //开发者自定义缓存池，默认是没有
         private ViewCacheExtension mViewCacheExtension;
 
         static final int DEFAULT_CACHE_SIZE = 2;
