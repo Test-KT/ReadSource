@@ -1,15 +1,19 @@
 package com.lsl.recycleviewsource;
 
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycle);
         mDatas = getData();
-        Log.e("info--->","init recycleview");
+        Log.e("info--->", "init recycleview");
         //set layoutmanager
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(linearLayoutManager);
 //        recyclerView.setHasFixedSize(true); //布局长宽 固定
+
+        TestLayoutManager testLayoutManager=new TestLayoutManager(this);
+        recyclerView.setLayoutManager(testLayoutManager);
+
         //set adapter
         recyclerView.setAdapter(new MyAdapter());
         //set divider
@@ -86,6 +94,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDialog(View v) {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Button button = new Button(MainActivity.this);
+                button.setText("我是按钮");
+                Looper.prepare();
+                Toast toast=new Toast(MainActivity.this);
+                toast.setView(button);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+//                Toast.makeText(MainActivity.this, "test txt", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }).start();
 
     }
 

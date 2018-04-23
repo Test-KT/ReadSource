@@ -4,3 +4,7 @@
 * ListView和RecycleView 对比，浅析缓存机制：https://zhuanlan.zhihu.com/p/23339185
 * recycleview剖析:https://blog.csdn.net/qq_23012315/article/details/50807224
 * recycleview剖析续集:https://blog.csdn.net/qq_23012315/article/details/51096696
+* RecycleView绘制部分：http://yourbay.me/all-about-tech/2017/04/17/recyclerview-rendering/
+* LayoutManager实现好玩的布局:https://blog.csdn.net/zxt0601/article/details/52956504
+* LayoutManager实现好玩的布局:https://blog.csdn.net/zxt0601/article/details/53730908
+* LayoutManager解读：http://wiresareobsolete.com/2014/09/building-a-recyclerview-layoutmanager-part-1/
