@@ -1,6 +1,7 @@
 package com.lsl.recycleviewsource;
 
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,8 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.lsl.source.viewpage.PagerAdapter;
+import com.lsl.source.viewpage.ViewPagerSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +28,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<String> mDatas;
 
+    ViewPagerSource mViewPagerSource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycle);
+        mViewPagerSource = findViewById(R.id.viewpager);
+
+
         mDatas = getData();
         Log.e("info--->", "init recycleview");
         //set layoutmanager
@@ -36,13 +46,46 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(linearLayoutManager);
 //        recyclerView.setHasFixedSize(true); //布局长宽 固定
 
-        TestLayoutManager testLayoutManager=new TestLayoutManager(this);
+        TestLayoutManager testLayoutManager = new TestLayoutManager(this);
         recyclerView.setLayoutManager(testLayoutManager);
 
         //set adapter
         recyclerView.setAdapter(new MyAdapter());
         //set divider
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+
+        //test viewpager
+
+        mViewPagerSource.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            @Override
+            public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+                return view == object;
+            }
+
+            @Override
+            public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+//                super.destroyItem(container, position, object);
+                container.removeView((ImageView) object);
+            }
+
+            @NonNull
+            @Override
+            public Object instantiateItem(@NonNull ViewGroup container, int position) {
+                ImageView imageView = new ImageView(container.getContext());
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                imageView.setImageResource(R.mipmap.ic_launcher_round);
+                container.addView(imageView);
+                return imageView;
+            }
+        });
+
 
     }
 
@@ -101,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
                 Button button = new Button(MainActivity.this);
                 button.setText("我是按钮");
                 Looper.prepare();
-                Toast toast=new Toast(MainActivity.this);
+                Toast toast = new Toast(MainActivity.this);
                 toast.setView(button);
-                toast.setGravity(Gravity.CENTER,0,0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
 //                Toast.makeText(MainActivity.this, "test txt", Toast.LENGTH_SHORT).show();
                 Looper.loop();
