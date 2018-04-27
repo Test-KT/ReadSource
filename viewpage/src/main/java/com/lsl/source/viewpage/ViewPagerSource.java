@@ -1091,6 +1091,11 @@ public class ViewPagerSource extends ViewGroup {
         populate(mCurItem);
     }
 
+    /**
+     * 里面走完PageAdapter所有的生命周期
+     *
+     * @param newCurrentItem
+     */
     void populate(int newCurrentItem) {
         ItemInfo oldCurInfo = null;
         if (mCurItem != newCurrentItem) {
@@ -1126,7 +1131,7 @@ public class ViewPagerSource extends ViewGroup {
         final int startPos = Math.max(0, mCurItem - pageLimit);
         final int N = mAdapter.getCount();
         final int endPos = Math.min(N - 1, mCurItem + pageLimit);
-
+        Log.e(TAG, "pagelimit:" + pageLimit + " startPos:" + startPos + " endPos:" + endPos);
         if (N != mExpectedAdapterCount) {
             String resName;
             try {

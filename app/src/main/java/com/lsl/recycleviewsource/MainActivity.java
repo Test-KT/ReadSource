@@ -57,36 +57,39 @@ public class MainActivity extends AppCompatActivity {
 
         //test viewpager
 
-        mViewPagerSource.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 2;
-            }
+        mViewPagerSource.setAdapter(new MyPageAdater());
 
-            @Override
-            public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-                return view == object;
-            }
 
-            @Override
-            public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+
+    }
+
+    class MyPageAdater extends PagerAdapter{
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 //                super.destroyItem(container, position, object);
-                container.removeView((ImageView) object);
-            }
+            container.removeView((ImageView) object);
+        }
 
-            @NonNull
-            @Override
-            public Object instantiateItem(@NonNull ViewGroup container, int position) {
-                ImageView imageView = new ImageView(container.getContext());
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-                imageView.setImageResource(R.mipmap.ic_launcher_round);
-                container.addView(imageView);
-                return imageView;
-            }
-        });
-
-
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            ImageView imageView = new ImageView(container.getContext());
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setImageResource(R.mipmap.ic_launcher_round);
+            container.addView(imageView);
+            return imageView;
+        }
     }
 
 
