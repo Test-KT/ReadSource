@@ -1,11 +1,11 @@
 package com.lsl.recycleviewsource;
 
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,14 +30,31 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPagerSource mViewPagerSource;
 
+    Swipe2RefreshLayout mSwipe2RefreshLayout;
+
+    Handler mHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mHandler=new Handler();
         recyclerView = findViewById(R.id.recycle);
         mViewPagerSource = findViewById(R.id.viewpager);
 
+        mSwipe2RefreshLayout = findViewById(R.id.swipe2refresh);
+        mSwipe2RefreshLayout.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary,R.color.colorPrimaryDark, android.R.color.black);
+        mSwipe2RefreshLayout.setOnRefreshListener(new Swipe2RefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               mHandler.postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       mSwipe2RefreshLayout.setRefreshing(false);
+                   }
+               },3000);
+            }
+        });
 
         mDatas = getData();
         Log.e("info--->", "init recycleview");
@@ -60,10 +77,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerSource.setAdapter(new MyPageAdater());
 
 
-
     }
 
-    class MyPageAdater extends PagerAdapter{
+    class MyPageAdater extends PagerAdapter {
         @Override
         public int getCount() {
             return 3;

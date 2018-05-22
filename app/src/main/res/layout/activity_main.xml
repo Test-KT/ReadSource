@@ -3,20 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lsl.recycleviewsource.MainActivity"
     android:orientation="vertical">
+
     <Button
-        android:onClick="showDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test" />
+        android:onClick="showDialog"
+        android:text="test"
+        tools:text="@tools:sample/cities" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle"
+    <com.lsl.recycleviewsource.Swipe2RefreshLayout
+        android:id="@+id/swipe2refresh"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_layout">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </com.lsl.recycleviewsource.Swipe2RefreshLayout>
+
 
     <com.lsl.source.viewpage.ViewPagerSource
         android:id="@+id/viewpager"
